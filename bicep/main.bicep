@@ -24,7 +24,8 @@ module app_service 'modules/app_service.bicep' = {
   params: {
     application_name: naming.outputs.app_service
     service_plan_name: naming.outputs.service_plan
-    sku_name: 'B1'
+    sku_name: 'P1v3'
+    elastic_scale_enabled: true
     docker_server_url: 'https://index.docker.io'
     container_image: 'index.docker.io/patrickmds/hello-app:v1.0'
     app_insights_connection_string: application_insights.outputs.connection_string

@@ -10,11 +10,15 @@ param service_plan_name string
   'B1'
   'B2'
   'B3'
-  'S1'
-  'S2'
-  'S3'
+  'P1v3'
+  'P2v3'
+  'P3v3'
 ])
 param sku_name string
+@description('Whether to enable elastic scale for the service plan.')
+param elastic_scale_enabled bool = false
+@description('Whether to enable per-site scaling for the service plan.')
+param per_site_scaling bool = false
 @description('Docker server URL.')
 param docker_server_url string
 @description('The container image to use for the app service.')
@@ -36,6 +40,8 @@ resource service_plan 'Microsoft.Web/serverfarms@2024-04-01' = {
   kind: 'linux'
   properties: {
     reserved: true
+    elasticScaleEnabled: elastic_scale_enabled
+    perSiteScaling: per_site_scaling
   }
   tags: tags
 }
